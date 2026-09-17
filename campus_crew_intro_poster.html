@@ -82,16 +82,55 @@
     background:
       repeating-linear-gradient(0deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
       repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
-      radial-gradient(ellipse at 50% 25%, rgba(5,199,112,0.035), transparent 65%),
+      radial-gradient(ellipse at 50% 25%, rgba(5,199,112,0.04), transparent 65%),
       var(--black);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: clamp(36px, 6vh, 80px) clamp(24px, 5vw, 64px);
+    overflow: hidden;
+  }
+
+  /* Ambient Breathing Glow Behind Content */
+  .ambient-glow {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(850px, 90vw);
+    height: min(480px, 55vh);
+    background: radial-gradient(ellipse at center, rgba(5, 199, 112, 0.08) 0%, rgba(5, 199, 112, 0.02) 42%, transparent 70%);
+    filter: blur(48px);
+    pointer-events: none;
+    z-index: 1;
+    animation: ambient-pulse 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes ambient-pulse {
+    0% {
+      opacity: 0.55;
+      transform: translate(-50%, -50%) scale(0.93);
+    }
+    100% {
+      opacity: 0.95;
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+  }
+
+  /* Interactive Mouse Cursor Spotlight */
+  .spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(640px circle at var(--mouse-x, 50%) var(--mouse-y, 35%), rgba(5, 199, 112, 0.06), transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.3s ease;
   }
 
   .content {
+    position: relative;
+    z-index: 2;
     width: 100%;
     max-width: 780px;
     display: flex;
@@ -107,6 +146,10 @@
     gap: clamp(12px, 1.6vw, 18px);
     margin-bottom: clamp(6px, 1vh, 12px);
     align-self: flex-start;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .brand-row:hover {
+    transform: translateY(-1px);
   }
 
   .logo {
@@ -143,6 +186,13 @@
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+    width: fit-content;
+    padding: 2px 0;
+    transition: color 0.25s ease;
+    user-select: text;
+  }
+  .boot:hover {
+    color: rgba(255, 255, 255, 0.85);
   }
   .boot .prompt {
     color: var(--hacker-green);
@@ -153,7 +203,7 @@
   .reveal-prompt {
     opacity: 0;
     transform: translateY(6px);
-    animation: rise-prompt 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+    animation: rise-prompt 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
     will-change: opacity, transform;
   }
   @keyframes rise-prompt {
@@ -169,7 +219,7 @@
     width: 0;
     vertical-align: middle;
     letter-spacing: 0;
-    animation: type-in 0.72s steps(24, end) 0.58s forwards;
+    animation: type-in 0.58s steps(24, end) 0.38s forwards;
     will-change: width;
   }
   @keyframes type-in {
@@ -186,7 +236,7 @@
     margin-left: 4px;
     flex-shrink: 0;
     opacity: 0;
-    animation: cursor-appear 0.01s forwards 0.45s, cursor-blink 1.05s steps(1, start) infinite 0.45s;
+    animation: cursor-appear 0.01s forwards 0.28s, cursor-blink 1.05s steps(1, start) infinite 0.28s;
   }
   @keyframes cursor-appear {
     to { opacity: 1; }
@@ -196,11 +246,11 @@
     50% { opacity: 0; }
   }
 
-  /* Staggered Content Reveal System - Cinematic & Intentional */
+  /* Staggered Content Reveal System - Optimized Snappy Pacing */
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
@@ -210,50 +260,50 @@
 
   .reveal-logo {
     opacity: 0;
-    transform: translateY(12px);
-    animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.10s forwards;
+    transform: translateY(10px);
+    animation: rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
     will-change: opacity, transform;
   }
 
   .reveal-badge {
     opacity: 0;
-    transform: translateY(12px);
-    animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+    transform: translateY(10px);
+    animation: rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
     will-change: opacity, transform;
   }
 
   .reveal-h1 {
     opacity: 0;
-    transform: translateY(12px);
-    animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.32s forwards;
+    transform: translateY(10px);
+    animation: rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.98s forwards;
     will-change: opacity, transform;
   }
 
   .reveal-h2 {
     opacity: 0;
-    transform: translateY(12px);
-    animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.60s forwards;
+    transform: translateY(10px);
+    animation: rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.16s forwards;
     will-change: opacity, transform;
   }
 
   .reveal-tagline {
     opacity: 0;
-    transform: translateY(12px);
-    animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.88s forwards;
+    transform: translateY(10px);
+    animation: rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.34s forwards;
     will-change: opacity, transform;
   }
 
   .reveal-copy {
     opacity: 0;
-    transform: translateY(12px);
-    animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 2.16s forwards;
+    transform: translateY(10px);
+    animation: rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;
     will-change: opacity, transform;
   }
 
   .reveal-status {
     opacity: 0;
-    transform: translateY(12px);
-    animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) 2.44s forwards;
+    transform: translateY(10px);
+    animation: rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.70s forwards;
     will-change: opacity, transform;
   }
 
@@ -273,6 +323,7 @@
     display: inline-block;
     color: var(--hacker-green);
     font-weight: 900;
+    text-shadow: 0 0 32px rgba(5, 199, 112, 0.22);
   }
 
   .desktop-break {
@@ -313,10 +364,23 @@
   }
 
   .cta-row {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 12px;
+    width: fit-content;
+    padding: 6px 12px;
+    margin-left: -12px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
   }
+  .cta-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(5, 199, 112, 0.18);
+    transform: translateX(4px);
+  }
+
   .cta-dot {
     width: 8px;
     height: 8px;
@@ -325,7 +389,12 @@
     box-shadow: 0 0 6px rgba(5, 199, 112, 0.6);
     flex-shrink: 0;
     animation: status-pulse 3s ease-in-out infinite;
+    transition: box-shadow 0.3s ease;
   }
+  .cta-row:hover .cta-dot {
+    box-shadow: 0 0 12px 3px rgba(5, 199, 112, 0.9);
+  }
+
   @keyframes status-pulse {
     0%, 100% {
       box-shadow: 0 0 4px 0 rgba(5, 199, 112, 0.45);
@@ -341,6 +410,10 @@
     font-size: clamp(12.5px, 1.3vw, 14px);
     color: rgba(255,255,255,0.70);
     letter-spacing: 0.02em;
+    transition: color 0.25s ease;
+  }
+  .cta-row:hover .cta-text {
+    color: rgba(255, 255, 255, 0.92);
   }
 
   /* Responsive Rules */
@@ -362,10 +435,18 @@
     .logo {
       height: clamp(24px, 6.5vw, 32px);
     }
+    .cta-row {
+      margin-left: 0;
+      padding: 6px 0;
+    }
   }
 
   /* Accessibility: Prefers Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
+    .ambient-glow,
+    .spotlight {
+      display: none !important;
+    }
     .reveal-logo,
     .reveal-badge,
     .reveal-prompt,
@@ -394,6 +475,11 @@
 <body>
 
   <div class="stage">
+    <!-- Ambient Breathing Glow -->
+    <div class="ambient-glow" aria-hidden="true"></div>
+    <!-- Interactive Mouse Spotlight -->
+    <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
     <div class="content">
 
       <!-- Brand Identity Lockup: HackerRank + Campus Crew -->
@@ -435,6 +521,28 @@
 
     </div>
   </div>
+
+  <script>
+    // Smooth Interactive Mouse Spotlight
+    (function() {
+      const stage = document.querySelector('.stage');
+      const spotlight = document.getElementById('spotlight');
+      if (!stage || !spotlight || !window.matchMedia('(pointer: fine)').matches) return;
+
+      stage.addEventListener('pointermove', function(e) {
+        const rect = stage.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        spotlight.style.setProperty('--mouse-x', x.toFixed(2) + '%');
+        spotlight.style.setProperty('--mouse-y', y.toFixed(2) + '%');
+      });
+
+      stage.addEventListener('mouseleave', function() {
+        spotlight.style.setProperty('--mouse-x', '50%');
+        spotlight.style.setProperty('--mouse-y', '35%');
+      });
+    })();
+  </script>
 
 </body>
 </html>
