@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HackerRank Campus Crew RIT — Vertical Story Poster</title>
+<style>
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Departure Mono';
+    src: url('../fonts/DepartureMono-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  :root {
+    --black: #141419;
+    --hacker-green: #05C770;
+    --terminal-cyan: #78FAEC;
+    --white: #FFFFFF;
+    --text-muted: rgba(255, 255, 255, 0.70);
+    --sans: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'Departure Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.024) 0px, rgba(255,255,255,0.024) 1px, transparent 1px, transparent 48px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.024) 0px, rgba(255,255,255,0.024) 1px, transparent 1px, transparent 48px),
+      var(--black);
+    font-family: var(--sans);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 100px 80px 90px;
+    position: relative;
+  }
+
+  /* Center ambient glow */
+  .glow {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(5, 199, 112, 0.09) 0%, rgba(5, 199, 112, 0.01) 55%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .crew-text {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .emblem {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* Content Core */
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    position: relative;
+    z-index: 2;
+    margin-top: -40px;
+  }
+
+  .boot {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .boot .prompt {
+    color: var(--hacker-green);
+    font-weight: 700;
+  }
+
+  .headline {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #05C770 0%, #00EA82 50%, #43FFA8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .mono-tag {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--terminal-cyan);
+    letter-spacing: 0.02em;
+  }
+
+  .body-copy {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .manifesto-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 28px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(5, 199, 112, 0.35);
+    border-radius: 14px;
+  }
+
+  .manifesto-title {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .manifesto-title .accent {
+    color: var(--hacker-green);
+  }
+
+  .manifesto-sub {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  /* Center QR Card */
+  .qr-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 36px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    align-self: center;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  .qr-box {
+    background: #FFFFFF;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .qr-box img {
+    width: 220px;
+    height: 220px;
+    display: block;
+  }
+
+  .qr-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .qr-caption {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 28px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-url {
+    font-family: var(--mono);
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .footer-subtext {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--hacker-green);
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+  <div class="glow"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand-group">
+      <img src="../logos/Logo Light Wide.svg" class="logo" alt="HackerRank">
+      <div class="divider"></div>
+      <span class="crew-text">Campus Crew</span>
+    </div>
+    <img src="../logos/emblem-lockup-transparent.png" class="emblem" alt="HackerRank Campus Crew RIT">
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="boot">
+      <span class="prompt">$</span>
+      <span>initializing campus_crew_rit</span>
+    </div>
+
+    <h1 class="headline">
+      A new beginning for<br>
+      <span class="highlight">Ramco Institute of Technology</span>
+    </h1>
+
+    <div class="mono-tag">skills over pedigree, starting here.</div>
+
+    <p class="body-copy">
+      A student community built around coding, challenges, technical events, workshops, and growing together.
+    </p>
+
+    <div class="manifesto-pill">
+      <div class="manifesto-title">
+        Code. Compete. <span class="accent">Get recognized.</span>
+      </div>
+      <div class="manifesto-sub">
+        Take part in upcoming coding challenges, events, and activities — with exciting rewards to be revealed along the way.
+      </div>
+    </div>
+
+    <!-- QR Block -->
+    <div class="qr-card">
+      <div class="qr-box">
+        <img src="whatsapp-qr.png" alt="WhatsApp Community QR">
+      </div>
+      <div>
+        <div class="qr-title">JOIN THE COMMUNITY</div>
+        <div class="qr-caption">Scan to join official WhatsApp Crew</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-url">hackerrank-campus-crew-rit.vercel.app</div>
+    <div class="footer-subtext">Be there from the beginning.</div>
+  </div>
+
+</body>
+</html>

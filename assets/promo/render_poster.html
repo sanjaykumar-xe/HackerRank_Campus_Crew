@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HackerRank Campus Crew RIT — Launch Poster</title>
+<style>
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Departure Mono';
+    src: url('../fonts/DepartureMono-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  :root {
+    --black: #141419;
+    --hacker-green: #05C770;
+    --terminal-cyan: #78FAEC;
+    --white: #FFFFFF;
+    --text-muted: rgba(255, 255, 255, 0.68);
+    --sans: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'Departure Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.024) 0px, rgba(255,255,255,0.024) 1px, transparent 1px, transparent 48px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.024) 0px, rgba(255,255,255,0.024) 1px, transparent 1px, transparent 48px),
+      var(--black);
+    font-family: var(--sans);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 80px 100px;
+    position: relative;
+  }
+
+  /* Subtle background radial spotlight */
+  .bg-spotlight {
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(5, 199, 112, 0.08) 0%, rgba(5, 199, 112, 0.01) 50%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Top Navigation / Brand Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .brand-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .crew-badge {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+
+  .emblem-logo {
+    height: 58px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.6));
+  }
+
+  /* Main Hero Content Area */
+  .main-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+    margin-top: 10px;
+  }
+
+  .left-col {
+    max-width: 1050px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .boot {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .boot .prompt {
+    color: var(--hacker-green);
+    font-weight: 700;
+  }
+
+  .headline {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #05C770 0%, #00EA82 50%, #43FFA8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .tagline-mono {
+    font-family: var(--mono);
+    font-size: 19px;
+    color: var(--terminal-cyan);
+    letter-spacing: 0.02em;
+  }
+
+  .body-copy {
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 900px;
+  }
+
+  .rewards-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 22px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    width: fit-content;
+  }
+
+  .rewards-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .rewards-title .green {
+    color: var(--hacker-green);
+  }
+
+  .rewards-desc {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 780px;
+    line-height: 1.5;
+  }
+
+  /* Right Card: QR Code & CTA */
+  .right-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 32px 36px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(5, 199, 112, 0.3);
+    border-radius: 16px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .qr-frame {
+    background: #FFFFFF;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .qr-img {
+    width: 170px;
+    height: 170px;
+    display: block;
+  }
+
+  .cta-badge {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .cta-sub {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.02em;
+  }
+
+  /* Footer bar */
+  .footer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    z-index: 2;
+    font-family: var(--mono);
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dot-green {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--hacker-green);
+    box-shadow: 0 0 8px var(--hacker-green);
+  }
+
+  .sign-off {
+    color: var(--hacker-green);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-spotlight"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand-left">
+      <img src="../logos/Logo Light Wide.svg" class="logo" alt="HackerRank">
+      <div class="brand-divider"></div>
+      <span class="crew-badge">Campus Crew</span>
+    </div>
+    <img src="../logos/emblem-lockup-transparent.png" class="emblem-logo" alt="HackerRank Campus Crew RIT">
+  </div>
+
+  <!-- Main Hero -->
+  <div class="main-content">
+    <div class="left-col">
+      <div class="boot">
+        <span class="prompt">$</span>
+        <span>initializing campus_crew_rit</span>
+      </div>
+
+      <h1 class="headline">
+        A new beginning for<br>
+        <span class="highlight">Ramco Institute of Technology</span>
+      </h1>
+
+      <div class="tagline-mono">skills over pedigree, starting here.</div>
+
+      <p class="body-copy">
+        A student community built around coding, challenges, technical events, workshops, and growing together — built on the same platform used in real technical hiring.
+      </p>
+
+      <div class="rewards-box">
+        <div class="rewards-title">
+          Code. Compete. <span class="green">Get recognized.</span>
+        </div>
+        <div class="rewards-desc">
+          Take part in upcoming coding challenges, events, and activities — with exciting rewards to be revealed along the way.
+        </div>
+      </div>
+    </div>
+
+    <!-- Right QR CTA Card -->
+    <div class="right-card">
+      <div class="qr-frame">
+        <img src="whatsapp-qr.png" class="qr-img" alt="WhatsApp Community QR">
+      </div>
+      <div>
+        <div class="cta-badge">JOIN THE COMMUNITY</div>
+        <div class="cta-sub">Scan to enter official WhatsApp Crew</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bar -->
+  <div class="footer-bar">
+    <div class="footer-links">
+      <div class="footer-item">
+        <span class="dot-green"></span>
+        <span>hackerrank-campus-crew-rit.vercel.app</span>
+      </div>
+      <div class="footer-item">
+        <span>linkedin.com/in/hackerrank-campus-crew-rit</span>
+      </div>
+    </div>
+    <div class="sign-off">Be there from the beginning.</div>
+  </div>
+
+</body>
+</html>
