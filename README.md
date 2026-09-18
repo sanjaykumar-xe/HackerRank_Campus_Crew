@@ -11,6 +11,12 @@ The official teaser landing page for the **HackerRank Campus Crew** chapter at *
 
 ---
 
+## 💬 Community Channels
+- **WhatsApp Community**: [Join Community](https://chat.whatsapp.com/JNTKvVyODlLEBS4kRco1Fo)
+- **LinkedIn Profile**: [HackerRank Campus Crew RIT](https://www.linkedin.com/in/hackerrank-campus-crew-rit)
+
+---
+
 ## 📁 Repository Structure
 
 ```text
