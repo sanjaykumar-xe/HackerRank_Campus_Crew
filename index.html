@@ -67,11 +67,15 @@
   body {
     font-family: var(--sans);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
     min-height: 100dvh;
     overflow-x: hidden;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
+      var(--black);
   }
 
   .stage {
@@ -79,10 +83,6 @@
     width: 100%;
     min-height: 100vh;
     min-height: 100dvh;
-    background:
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0px, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 48px),
-      var(--black);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -541,10 +541,167 @@
     }
   }
 
+  /* ============================================================
+     Benefits Section: "What's In It For You?"
+     ============================================================ */
+  .benefits-section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: clamp(72px, 11vh, 120px) clamp(24px, 5vw, 64px) clamp(96px, 14vh, 150px);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: transparent;
+  }
+
+  .benefits-container {
+    width: 100%;
+    max-width: 1040px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4.5vh, 44px);
+  }
+
+  .benefits-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .benefits-heading {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(22px, 2.8vw, 30px);
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .benefits-intro {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(14.5px, 1.4vw, 16.5px);
+    color: var(--text-muted);
+    line-height: 1.55;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 1.8vw, 22px);
+  }
+
+  .benefit-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: clamp(22px, 2.4vw, 28px);
+    background: rgba(255, 255, 255, 0.022);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                background-color 0.25s ease,
+                box-shadow 0.25s ease;
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(5, 199, 112, 0.35);
+    background: rgba(255, 255, 255, 0.038);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  .benefit-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--hacker-green);
+    letter-spacing: 0.06em;
+    transition: color 0.2s ease;
+  }
+
+  .benefit-card:hover .benefit-num {
+    color: #22E88A;
+  }
+
+  .benefit-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(14px, 1.35vw, 15.5px);
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .benefit-desc {
+    font-family: var(--sans);
+    font-weight: 450;
+    font-size: clamp(13.5px, 1.3vw, 14.5px);
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Scroll-Triggered Reveal for Benefits Section */
+  .benefits-header,
+  .benefit-card {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .benefits-section.is-revealed .benefits-header {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .benefits-section.is-revealed .benefit-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .benefits-section.is-revealed .benefit-card:nth-child(1) { transition-delay: 0.06s; }
+  .benefits-section.is-revealed .benefit-card:nth-child(2) { transition-delay: 0.12s; }
+  .benefits-section.is-revealed .benefit-card:nth-child(3) { transition-delay: 0.18s; }
+  .benefits-section.is-revealed .benefit-card:nth-child(4) { transition-delay: 0.24s; }
+  .benefits-section.is-revealed .benefit-card:nth-child(5) { transition-delay: 0.30s; }
+  .benefits-section.is-revealed .benefit-card:nth-child(6) { transition-delay: 0.36s; }
+
   /* Responsive Rules */
+  @media (max-width: 960px) {
+    .benefits-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
   @media (max-width: 680px) {
     .desktop-break {
       display: inline;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .benefits-section {
+      padding: 56px 20px 84px;
+    }
+    .benefits-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .benefit-card {
+      padding: 20px;
     }
   }
 
@@ -603,6 +760,12 @@
       transform: none !important;
       animation: none !important;
       width: auto !important;
+    }
+    .benefits-header,
+    .benefit-card {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
     }
     .cursor {
       animation: none !important;
@@ -691,6 +854,62 @@
     </div>
   </div>
 
+  <!-- Benefits Section: What's In It For You? -->
+  <section class="benefits-section" id="benefits" aria-label="What's In It For You?">
+    <div class="benefits-container">
+
+      <div class="benefits-header">
+        <h2 class="benefits-heading">WHAT'S IN IT FOR YOU?</h2>
+        <p class="benefits-intro">More than a coding community — a place to build skills, connect, and grow.</p>
+      </div>
+
+      <div class="benefits-grid">
+        <!-- 01 Coding Challenges -->
+        <div class="benefit-card">
+          <div class="benefit-num">01</div>
+          <h3 class="benefit-title">CODING CHALLENGES</h3>
+          <p class="benefit-desc">Sharpen your problem-solving skills through coding challenges and competitions.</p>
+        </div>
+
+        <!-- 02 Events & Workshops -->
+        <div class="benefit-card">
+          <div class="benefit-num">02</div>
+          <h3 class="benefit-title">EVENTS & WORKSHOPS</h3>
+          <p class="benefit-desc">Take part in technical sessions, workshops, and community activities.</p>
+        </div>
+
+        <!-- 03 Recognition -->
+        <div class="benefit-card">
+          <div class="benefit-num">03</div>
+          <h3 class="benefit-title">RECOGNITION</h3>
+          <p class="benefit-desc">Get recognized for participation, performance, and contributions.</p>
+        </div>
+
+        <!-- 04 Rewards -->
+        <div class="benefit-card">
+          <div class="benefit-num">04</div>
+          <h3 class="benefit-title">REWARDS</h3>
+          <p class="benefit-desc">Exciting rewards will be revealed through upcoming challenges and events.</p>
+        </div>
+
+        <!-- 05 Community -->
+        <div class="benefit-card">
+          <div class="benefit-num">05</div>
+          <h3 class="benefit-title">COMMUNITY</h3>
+          <p class="benefit-desc">Connect with students who are interested in coding, technology, and building skills together.</p>
+        </div>
+
+        <!-- 06 Real-World Skills -->
+        <div class="benefit-card">
+          <div class="benefit-num">06</div>
+          <h3 class="benefit-title">REAL-WORLD SKILLS</h3>
+          <p class="benefit-desc">Practice on a platform used in technical hiring and strengthen skills that matter beyond the classroom.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <script>
     // Smooth Interactive Mouse Spotlight (purely cursor-activated)
     (function() {
@@ -718,6 +937,31 @@
       stage.addEventListener('pointerleave', function() {
         spotlight.style.opacity = '0';
       });
+    })();
+
+    // Scroll-triggered Reveal for Benefits Section
+    (function() {
+      const section = document.querySelector('.benefits-section');
+      if (!section) return;
+
+      if (!('IntersectionObserver' in window)) {
+        section.classList.add('is-revealed');
+        return;
+      }
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            section.classList.add('is-revealed');
+            observer.unobserve(section);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      observer.observe(section);
     })();
   </script>
 
